@@ -1,24 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserRepoByUsername, getUserDataByUsername } from '../api/index';
+import { Dropdown, Table, Button } from 'react-bootstrap';
 
 const Repos = () => {
   const { username } = useParams();
   const [repos, setRepos] = useState([]);
+  const [perPage, setPerPage] = useState(5);
+
+  const onClick = (e) => {
+    setPerPage(e.target.innerText);
+  };
   useEffect(() => {
-    getUserRepoByUsername(username).then((res) => {
+    getUserRepoByUsername(username, perPage).then((res) => {
       console.log(res.data);
       setRepos(res.data);
     });
-  }, [username]);
+  }, [username, perPage]);
 
   return (
-    <>
+    <div className='container'>
       <div className='font-bold m-5 text-lg border border-5 rounded-full text-center'>
         repos of {username}
       </div>
-      <div className='container m-3 mr-3'>
-        <table className='table table-striped table-auto'>
+      <Dropdown className='inline'>
+        <Dropdown.Toggle
+          variant='success'
+          className='rounded-full'
+          id='dropdown-basic'
+        >
+          Per Page
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={onClick}>10</Dropdown.Item>
+          <Dropdown.Item onClick={onClick}>25</Dropdown.Item>
+          <Dropdown.Item onClick={onClick}>50</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <Button className='m-2 rounded-full' variant='info'>
+        Showing {perPage} Repos
+      </Button>{' '}
+      <div className='mr-3 mt-3'>
+        <Table
+          striped
+          bordered
+          hover
+          className='table table-striped table-auto'
+        >
           <thead>
             <tr>
               <th>Repo Name</th>
@@ -47,9 +76,9 @@ const Repos = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -14,9 +14,9 @@ const getUserDataByUsername = async (username) => {
     });
 };
 
-const getUserRepoByUsername = async (username) => {
+const getUserRepoByUsername = async (username, perPage) => {
   return await axios
-    .get(`${baseURL}${username}/repos?per_page=10&page=2&sort=created:asc`)
+    .get(`${baseURL}${username}/repos?per_page=${perPage}&sort=created:asc`)
     .then((res) => {
       return res;
     })
