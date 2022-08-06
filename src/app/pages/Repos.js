@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserRepoByUsername, getUserDataByUsername } from '../api/index';
 import { Dropdown, Table, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Repos = () => {
   const { username } = useParams();
@@ -20,6 +21,9 @@ const Repos = () => {
 
   return (
     <div className='container'>
+      <Link to='/' className='m-2 rounded-full btn btn-danger'>
+        Back to Search
+      </Link>
       <div className='font-bold m-5 text-lg border border-5 rounded-full text-center'>
         repos of {username}
       </div>
@@ -39,7 +43,7 @@ const Repos = () => {
         </Dropdown.Menu>
       </Dropdown>
       <Button className='m-2 rounded-full' variant='info'>
-        Showing {perPage} Repos
+        Showing {perPage} Repos per page
       </Button>{' '}
       <div className='mr-3 mt-3'>
         <Table
