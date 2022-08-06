@@ -13,9 +13,7 @@ const SearchBox = ({ getText, data }) => {
       <div className='container text-center mt-3'>
         <div className='container'>
           <h1>Search Github Users</h1>
-          <p className='lead'>
-            Enter a username to fetch a users profile info and repos
-          </p>
+          <p className='lead'>Enter a username to fetch a users profile info</p>
           <input
             type='text'
             id='searchUser'
@@ -24,7 +22,6 @@ const SearchBox = ({ getText, data }) => {
             value={text}
             onChange={handleChange}
           />
-          <p>{data?.name}</p>
         </div>
         <br />
       </div>

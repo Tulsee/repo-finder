@@ -13,4 +13,13 @@ const getUserDataByUsername = async (username) => {
       // console.log(err);
     });
 };
-export { getUserDataByUsername };
+
+const getUserRepoByUsername = async (username) => {
+  return await axios
+    .get(`${baseURL}${username}/repos?per_page=10&page=2&sort=created:asc`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err));
+};
+export { getUserDataByUsername, getUserRepoByUsername };

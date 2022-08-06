@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBox from '../components/SearchBox';
-import UserDetail from '../components/UserDetail';
 import { getUserDataByUsername } from '../api/index';
+import UserProfile from './UserProfile';
 
 const HomePage = () => {
   const [username, setUsername] = useState();
@@ -20,7 +20,7 @@ const HomePage = () => {
     <>
       <SearchBox getText={getUsername} data={data} />
       {data ? (
-        <UserDetail data={data} />
+        <UserProfile data={data} username={username} />
       ) : (
         <>
           <h1 className='text-center'>
