@@ -1,41 +1,49 @@
 import React from 'react';
+import moment from 'moment';
 
-const UserDetail = () => {
+const UserDetail = ({ data }) => {
   return (
     <>
-      <div className='card border-primary mb-3'>
-        <div className='card-header'>
-          <h3>name</h3>
-        </div>
+      <div className='card container border-primary mb-3'>
+        {data.name ? (
+          <div className='card-header mt-2'>
+            <h3>Full Name: {data.name}</h3>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className='card-body'>
           <div className='row'>
             <div className='col-md-3'>
-              <img className='img-thumbnail avatar' src='' alt='' />
-              <a target='_blank' className='btn btn-primary btn-block' href='='>
-                View Profile
-              </a>
+              <img
+                className='img-thumbnail avatar mb-2'
+                src={data.avatar_url}
+                alt=''
+              />
             </div>
             <div className='col-md-9'>
-              <span className='badge badge-dark'>Public Repos: </span>
-              <span className='badge badge-primary'>Public Gists: </span>
-              <span className='badge badge-success'>Followers: </span>
-              <span className='badge badge-info'>Following: </span>
-              <br />
-              <br />
               <ul className='list-group'>
-                <li className='list-group-item'>Company: </li>
                 <li className='list-group-item'>
-                  Website/blog: <a href='' target='_blank'></a>
+                  Public Repos Count: {data.public_repos}{' '}
                 </li>
-                <li className='list-group-item'>Location:</li>
-                <li className='list-group-item'>Member Since: </li>
+                <li className='list-group-item'>Company: {data.company} </li>
+                <li className='list-group-item'>
+                  Website/blog: {data.blog} <a href='' target='_blank'></a>
+                </li>
+                <li className='list-group-item'>Location: {data.location}</li>
+                <li className='list-group-item'>
+                  Member Since: {moment(data.created_at).format('YYYY-MM-DD')}{' '}
+                </li>
               </ul>
+              <br />
+              <a target='_blank' className='btn btn-warning btn-sm' href='='>
+                View Profile
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <h3 className='page-header'>Latest Repos</h3>
-      <div id='repos'></div>
     </>
   );
 };

@@ -7,7 +7,7 @@ const SearchBox = ({ getText, data }) => {
     setText(value);
     getText(value);
   };
-  console.log(data?.name);
+  // console.log(data?.name);
   return (
     <>
       <div className='container text-center mt-3'>

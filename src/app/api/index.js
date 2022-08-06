@@ -10,7 +10,7 @@ const getUserDataByUsername = async (username) => {
       return res;
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 export { getUserDataByUsername };

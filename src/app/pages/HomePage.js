@@ -5,26 +5,28 @@ import { getUserDataByUsername } from '../api/index';
 
 const HomePage = () => {
   const [username, setUsername] = useState();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const getUsername = (name) => {
     setUsername(name);
   };
   // console.log(username);
   useEffect(() => {
-    getUserDataByUsername(username).then((res) => {
+    getUserDataByUsername(username || '').then((res) => {
       setData(res?.data);
-      // console.log(res?.data);
     });
   }, [username]);
+  console.log(data);
   return (
     <>
       <SearchBox getText={getUsername} data={data} />
-      {data == 'undefined' ? (
-        <h1 className='text-center'>
-          Please enter username to see their github account detail
-        </h1>
+      {data ? (
+        <UserDetail data={data} />
       ) : (
-        <UserDetail />
+        <>
+          <h1 className='text-center'>
+            Please enter username to see their github account detail
+          </h1>
+        </>
       )}
     </>
   );
